@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaskManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Parent_Task">
+    <Key>
+      <PropertyRef Name="ParentId" />
+    </Key>
+    <Property Name="ParentTask" Type="varchar" MaxLength="120" />
+    <Property Name="ParentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="200" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="ManagerId" Type="bigint" />
+    <Property Name="IsCompleted" Type="bit" />
+    <Property Name="TaskCount" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="bigint" Nullable="false" />
+    <Property Name="TaskName" Type="varchar" MaxLength="120" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="Priority" Type="bigint" />
+    <Property Name="ProjectId" Type="bigint" />
+    <Property Name="status" Type="bit" />
+    <Property Name="UserId" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="200" />
+    <Property Name="LastName" Type="varchar" MaxLength="200" />
+    <Property Name="EmployeeId" Type="varchar" MaxLength="200" />
+    <Property Name="ProjectId" Type="bigint" />
+    <Property Name="TaskId" Type="bigint" />
+  </EntityType>
+  <EntityContainer Name="TaskManagerModelStoreContainer">
+    <EntitySet Name="Parent_Task" EntityType="Self.Parent_Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
